@@ -15,6 +15,6 @@
 
 (package
  (name mjson)
- (synopsis "Composable, applicative and monadic DSL for decoding Yojson values. ")
- (description "Composable, applicative and monadic DSL for decoding Yojson values. ")
+ (synopsis "Composable, applicative and monadic DSL for decoding Yojson values")
+ (description "Composable, applicative and monadic DSL for decoding Yojson values")
  (depends ocaml dune yojson alcotest))
