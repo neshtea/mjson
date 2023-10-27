@@ -15,8 +15,8 @@ let make_person name age = { name; age }
 
 (* (monadic) decoder for Yojson.Safe.t values into a person. *)
 let person_decoder =
-  let open Mjson.Decoder.Safe in
-  let open Mjson.Decoder.Safe.Syntax in
+  let open Mjson.Decoder.Yojson.Safe in
+  let open Mjson.Decoder.Yojson.Safe.Syntax in
   (* decode the field "name" into a string *)
   let* name = field "name" string in
   (* decode the field "age" into an int *)
@@ -25,22 +25,22 @@ let person_decoder =
      occured along the way. *)
   return @@ make_person name age
   ;;
+```
 
-(* (applicative) decoder for Yojson.Basic.t values into a person. *)
-let person_decoder_applicative =
-  let open Mjson.Decoder.Basic in
-  let open Mjson.Decoder.Basic.Syntax in
-  let+ name = field "name" string
-  and+ age = field "name" int in
-  make_person name age
+Example utop session
 
-let () =
-  let yojson : Yojson.Safe.t = `Assoc [ "name", `String "Ursula"; "age": `Float 88.0] in
-  match person_decoder yojson with
-    | Ok person -> Some person
-    | Error err ->
-        Printf.printf "Error parsing json: %s" (err |> Mjson.Decoder.Safe.Error.show);
-        None
+```ocaml
+utop # person_decoder @@ `Assoc [ "name", `String "Ursula"; "age", `Float 88.0];;
+- : (person, Mjson.Decoder.Yojson.Safe.Error.t) result =
+Ok {name = "Ursula"; age = 88}
+
+utop # person_decoder @@ `Assoc [ "name", `String "Ursula"; "age", `Bool true];;
+- : (person, Mjson.Decoder.Yojson.Safe.Error.t) result =
+Error
+ (Mjson.Decoder.Yojson.Safe.Error.Field ("age",
+   Mjson.Decoder.Yojson.Safe.Error.Failure ("not an int", `Bool true)))
+
+
 ```
 
 See the [tests](./test/decoder.ml) for more examples.
