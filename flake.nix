@@ -33,8 +33,7 @@
             nativeBuildInputs = [
               pkgs.gnumake
               pkgs.dune_3
-              pkgs.sqlite
-			  pkgs.nodejs
+			  pkgs.dune-release
 			  ocamlPackages.opam
 
               # ocamlStreaming
@@ -42,18 +41,8 @@
               ocamlPackages.ocaml
               ocamlPackages.utop
               ocamlPackages.ocaml-lsp
-              ocamlPackages.merlin
               ocamlPackages.ppx_deriving
               ocamlPackages.ppx_deriving_yojson
-              ocamlPackages.lwt
-              ocamlPackages.lwt_ppx
-              ocamlPackages.caqti
-              ocamlPackages.caqti-lwt
-              ocamlPackages.caqti-driver-postgresql
-              ocamlPackages.caqti-driver-sqlite3
-              ocamlPackages.dream
-              ocamlPackages.ptime
-              ocamlPackages.tyxml
 			  ocamlPackages.yojson
 			  ocamlPackages.alcotest
 			  ocamlPackages.odoc
