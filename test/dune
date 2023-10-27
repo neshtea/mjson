@@ -1,4 +1,4 @@
 (test
- (name mjson)
+ (name decoder)
  (libraries alcotest mjson)
  (preprocess (pps ppx_deriving.show ppx_deriving.eq)))
