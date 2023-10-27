@@ -7,20 +7,14 @@
 (source
  (github neshtea/mjson))
 
-(authors "Marco Schneider")
+(authors "Marco Schneider <marco.schneider@posteo.de")
 
 (maintainers "Marco Schneider <marco.schneider@posteo.de>")
 
-(license LICENSE)
-
-(documentation https://url/to/documentation)
+(license BSD-3-Clause)
 
 (package
  (name mjson)
- (synopsis "A short synopsis")
- (description "A longer description")
- (depends ocaml dune yojson alcotest)
- (tags
-  (topics "to describe" your project)))
-
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
+ (synopsis "Composable, applicative and monadic DSL for decoding Yojson values. ")
+ (description "Composable, applicative and monadic DSL for decoding Yojson values. ")
+ (depends ocaml dune yojson alcotest))
