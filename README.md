@@ -51,7 +51,6 @@ This packages comes with a nix DevShell.  All commands are intended for use
 within the provided (default) devShell.
 
 ```shell
-$ make build  # build the library
 $ make repl   # opens a utop repl with the project loaded
 $ make test   # runs all tests
 $ make doc    # generate all documentation
