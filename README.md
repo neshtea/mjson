@@ -13,6 +13,7 @@ type person =
 
 let make_person name age = { name; age }
 
+(* (monadic) decoder for Yojson.Safe.t values into a person. *)
 let person_decoder =
   let open Mjson.Decoder.Safe in
   let open Mjson.Decoder.Safe.Syntax in
@@ -25,13 +26,21 @@ let person_decoder =
   return @@ make_person name age
   ;;
 
-  let () =
-    let yojson : Yojson.Safe.t = `Assoc [ "name", `String "Ursula"; "age": `Float 88.0] in
-    match person_decoder yojson with
-      | Ok person -> Some person
-      | Error err ->
-          Printf.printf "Error parsing json: %s" (err |> Mjson.Decoder.Safe.Error.show);
-          None
+(* (applicative) decoder for Yojson.Basic.t values into a person. *)
+let person_decoder_applicative =
+  let open Mjson.Decoder.Basic in
+  let open Mjson.Decoder.Basic.Syntax in
+  let+ name = field "name" string
+  and+ age = field "name" int in
+  make_person name age
+
+let () =
+  let yojson : Yojson.Safe.t = `Assoc [ "name", `String "Ursula"; "age": `Float 88.0] in
+  match person_decoder yojson with
+    | Ok person -> Some person
+    | Error err ->
+        Printf.printf "Error parsing json: %s" (err |> Mjson.Decoder.Safe.Error.show);
+        None
 ```
 
 See the [tests](./test/decoder.ml) for more examples.
