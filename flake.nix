@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "Dev-environment for the Mjson library.";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -8,18 +8,16 @@
       url = "github:nix-ocaml/nix-overlays";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      supportedSystems = with inputs.flake-utils.lib.system; [ aarch64-darwin ];
+      supportedSystems = with inputs.flake-utils.lib.system; [
+        aarch64-darwin
+        x86_64-linux
+      ];
     in inputs.flake-utils.lib.eachSystem supportedSystems (system:
       let
-        inherit (inputs.gitignore.lib) gitignoreSource;
         overlays = [ inputs.ocaml-overlay.overlays.default ];
         pkgs = import nixpkgs { inherit system overlays; };
 
@@ -28,13 +26,12 @@
 
         formatter = pkgs.nixfmt;
         devShells = {
-          default = let
-          in pkgs.mkShell {
+          default = pkgs.mkShell {
             nativeBuildInputs = [
               pkgs.gnumake
               pkgs.dune_3
-			  pkgs.dune-release
-			  ocamlPackages.opam
+              pkgs.dune-release
+              ocamlPackages.opam
 
               # ocamlStreaming
               ocamlPackages.ocamlformat
@@ -43,9 +40,9 @@
               ocamlPackages.ocaml-lsp
               ocamlPackages.ppx_deriving
               ocamlPackages.ppx_deriving_yojson
-			  ocamlPackages.yojson
-			  ocamlPackages.alcotest
-			  ocamlPackages.odoc
+              ocamlPackages.yojson
+              ocamlPackages.alcotest
+              ocamlPackages.odoc
             ];
           };
         };
