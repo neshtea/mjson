@@ -17,8 +17,8 @@
  (name mjson)
  (synopsis "Composable, applicative and monadic DSL for decoding Yojson values")
  (description "Composable, applicative and monadic DSL for decoding Yojson values")
- (depends ocaml 
-          dune 
-          yojson 
+ (depends (ocaml (>= 4.08.0))
+          (dune  (>= 3.11))
+          (yojson  (>= 2.0.0))
           alcotest 
           ppx_deriving))
