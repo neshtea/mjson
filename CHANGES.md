@@ -1,3 +1,5 @@
+## 0.2.0-DEV (2023-11-05)
+
 ## 0.1.1 (2023-10-29)
 ### Added
 - added missing dependency to `dune-project` file
