@@ -1,4 +1,6 @@
 ## 0.2.0-DEV (2023-11-05)
+### Added
+- proper int decoder
 
 ## 0.1.1 (2023-10-29)
 ### Added
