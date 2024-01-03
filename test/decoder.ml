@@ -23,7 +23,7 @@ module Safe = struct
     Alcotest.(check int)
       "decodes int"
       33
-      (Safe.int (`Float 33.0) |> Result.get_ok)
+      (Safe.int (`Int 33) |> Result.get_ok)
   ;;
 
   let int_error () =
@@ -65,7 +65,7 @@ module Safe = struct
     Alcotest.(check (list int))
       "decodes list of int"
       [ 1; 2; 3 ]
-      (Safe.list Safe.int (`List [ `Float 1.0; `Float 2.2; `Float 3.1 ])
+      (Safe.list Safe.int (`List [ `Int 1; `Int 2; `Int 3 ])
        |> Result.get_ok)
   ;;
 
@@ -87,7 +87,7 @@ module Safe = struct
     Alcotest.(check int)
       "decodes at specific index"
       42
-      (Safe.index 1 Safe.int (`List [ `String "s"; `Float 42.0 ])
+      (Safe.index 1 Safe.int (`List [ `String "s"; `Int 42 ])
        |> Result.get_ok)
   ;;
 
@@ -111,7 +111,7 @@ module Safe = struct
       42
       (Safe.one_of
          [ Safe.exactly Safe.int 42; Safe.exactly Safe.int 23 ]
-         (`Float 42.0)
+         (`Int 42)
        |> Result.get_ok)
   ;;
 
@@ -121,7 +121,7 @@ module Safe = struct
       23
       (Safe.one_of
          [ Safe.exactly Safe.int 42; Safe.exactly Safe.int 23 ]
-         (`Float 23.0)
+         (`Int 23)
        |> Result.get_ok)
   ;;
 
@@ -131,14 +131,14 @@ module Safe = struct
       (Safe.Error.one_of
          [ Safe.Error.failure
              "not the expected value FIXME: generic printer"
-             (`Float 20.0)
+             (`Int 20)
          ; Safe.Error.failure
              "not the expected value FIXME: generic printer"
-             (`Float 20.0)
+             (`Int 20)
          ])
       (Safe.one_of
          [ Safe.exactly Safe.int 42; Safe.exactly Safe.int 23 ]
-         (`Float 20.0)
+         (`Int 20)
        |> Result.get_error)
   ;;
 
@@ -146,7 +146,7 @@ module Safe = struct
     Alcotest.(check int)
       "decodes first match"
       4
-      (Safe.map (fun x -> x * 2) Safe.int (`Float 2.0) |> Result.get_ok)
+      (Safe.map (fun x -> x * 2) Safe.int (`Int 2) |> Result.get_ok)
   ;;
 
   let map_error () =
@@ -160,7 +160,7 @@ module Safe = struct
     Alcotest.(check @@ option @@ int)
       "some value if ok"
       (Some 42)
-      (Safe.optional Safe.int (`Float 42.0) |> Result.get_ok)
+      (Safe.optional Safe.int (`Int 42) |> Result.get_ok)
   ;;
 
   let optional_none () =
@@ -174,7 +174,7 @@ module Safe = struct
     Alcotest.(check int)
       "decodes the field"
       42
-      (Safe.field "f" Safe.int (`Assoc [ "f", `Float 42.0 ]) |> Result.get_ok)
+      (Safe.field "f" Safe.int (`Assoc [ "f", `Int 42 ]) |> Result.get_ok)
   ;;
 
   let field_error_1 () =
@@ -219,7 +219,7 @@ module Safe = struct
 
   let author_yojson =
     `Assoc
-      [ "name", `String "Ursula"; "age", `Float 82.0; "tenured", `Bool true ]
+      [ "name", `String "Ursula"; "age", `Int 82; "tenured", `Bool true ]
   ;;
 
   let author_decoder_applicative_ok () =
@@ -264,7 +264,7 @@ module Safe = struct
             [ author_yojson
             ; `Assoc
                 [ "name", `String "Isaac"
-                ; "age", `Float 73.0
+                ; "age", `Int 73
                 ; "tenured", `Bool false
                 ]
             ] )

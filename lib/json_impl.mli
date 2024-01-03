@@ -4,6 +4,7 @@ module type S = sig
   type t [@@deriving show, eq]
 
   val match_string : t -> string option
+  val match_int : t -> int option
   val match_float : t -> float option
   val match_bool : t -> bool option
   val match_list : t -> t list option

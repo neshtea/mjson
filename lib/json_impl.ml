@@ -2,6 +2,7 @@ module type S = sig
   type t [@@deriving show, eq]
 
   val match_string : t -> string option
+  val match_int : t -> int option
   val match_float : t -> float option
   val match_bool : t -> bool option
   val match_list : t -> t list option
@@ -13,6 +14,11 @@ module Yojson_safe : S with type t = Yojson.Safe.t = struct
 
   let match_string = function
     | `String value -> Some value
+    | _ -> None
+  ;;
+
+  let match_int = function
+    | `Int value -> Some value
     | _ -> None
   ;;
 
@@ -43,6 +49,11 @@ module Yojson_basic : S with type t = Yojson.Basic.t = struct
 
   let match_string = function
     | `String value -> Some value
+    | _ -> None
+  ;;
+
+  let match_int = function
+    | `Int value -> Some value
     | _ -> None
   ;;
 

@@ -83,8 +83,8 @@ module Make (Y : Json_impl.S) : S with type elt = Y.t = struct
   ;;
 
   let int json =
-    match Y.match_float json with
-    | Some n -> int_of_float n |> Result.ok
+    match Y.match_int json with
+    | Some i -> Ok i
     | None -> Error (Error.failure "not an int" json)
   ;;
 

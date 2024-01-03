@@ -30,7 +30,7 @@ let person_decoder =
 Example utop session
 
 ```ocaml
-utop # person_decoder @@ `Assoc [ "name", `String "Ursula"; "age", `Float 88.0];;
+utop # person_decoder @@ `Assoc [ "name", `String "Ursula"; "age", `Int 88];;
 - : (person, Mjson.Decoder.Yojson.Safe.Error.t) result =
 Ok {name = "Ursula"; age = 88}
 
