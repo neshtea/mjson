@@ -1,7 +1,8 @@
 `mjson` is a small OCaml library for decoding JSON values from more low-level 
 JSON libraries such as [Yojson](https://github.com/ocaml-community/yojson).
 
-It is just a thin layer on top of Yojson (`Safe` and `Basic`).
+The current implementation comes with a thin layer on top of Yojson (`Safe` and
+`Basic`).
 
 # Examples
 
