@@ -10,7 +10,7 @@ license: "BSD-3-Clause"
 homepage: "https://github.com/neshtea/mjson"
 bug-reports: "https://github.com/neshtea/mjson/issues"
 depends: [
-  "ocaml" {>= "4.08.0"}
+  "ocaml" {>= "4.14.0"}
   "dune" {>= "3.11" & >= "3.11"}
   "yojson" {>= "2.0.0"}
   "alcotest"
