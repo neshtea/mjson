@@ -32,6 +32,7 @@
               pkgs.dune_3
               pkgs.dune-release
               ocamlPackages.opam
+              ocamlPackages.merlin
 
               # ocamlStreaming
               ocamlPackages.ocamlformat
