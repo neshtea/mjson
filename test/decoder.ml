@@ -20,10 +20,7 @@ module Safe = struct
   ;;
 
   let int_ok () =
-    Alcotest.(check int)
-      "decodes int"
-      33
-      (Safe.int (`Int 33) |> Result.get_ok)
+    Alcotest.(check int) "decodes int" 33 (Safe.int (`Int 33) |> Result.get_ok)
   ;;
 
   let int_error () =
@@ -65,8 +62,7 @@ module Safe = struct
     Alcotest.(check (list int))
       "decodes list of int"
       [ 1; 2; 3 ]
-      (Safe.list Safe.int (`List [ `Int 1; `Int 2; `Int 3 ])
-       |> Result.get_ok)
+      (Safe.list Safe.int (`List [ `Int 1; `Int 2; `Int 3 ]) |> Result.get_ok)
   ;;
 
   let list_error_1 () =
@@ -87,8 +83,7 @@ module Safe = struct
     Alcotest.(check int)
       "decodes at specific index"
       42
-      (Safe.index 1 Safe.int (`List [ `String "s"; `Int 42 ])
-       |> Result.get_ok)
+      (Safe.index 1 Safe.int (`List [ `String "s"; `Int 42 ]) |> Result.get_ok)
   ;;
 
   let index_error_1 () =
@@ -218,8 +213,7 @@ module Safe = struct
   let ursl = make_author "Ursula" 82 true
 
   let author_yojson =
-    `Assoc
-      [ "name", `String "Ursula"; "age", `Int 82; "tenured", `Bool true ]
+    `Assoc [ "name", `String "Ursula"; "age", `Int 82; "tenured", `Bool true ]
   ;;
 
   let author_decoder_applicative_ok () =
