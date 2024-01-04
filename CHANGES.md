@@ -1,3 +1,7 @@
+## 0.2.1 (2024-01-03)
+### Changed
+- added a lower version bound (>= 4.14.0) on the ocaml version
+
 ## 0.2.0 (2024-01-03)
 ### Added
 - proper int decoder
