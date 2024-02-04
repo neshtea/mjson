@@ -16,15 +16,15 @@ let make_person name age = { name; age }
 
 (* (monadic) decoder for Yojson.Safe.t values into a person. *)
 let person_decoder =
-  let open Mjson.Decoder.Yojson.Safe in
-  let open Mjson.Decoder.Yojson.Safe.Syntax in
+  let module D = Mjson.Decoder.Yojson.Safe in
+  let ( let* ) = Mjson.Decoder.Yojson.Safe.bind in
   (* decode the field "name" into a string *)
-  let* name = field "name" string in
+  let* name = D.field "name" string in
   (* decode the field "age" into an int *)
-  let* age = field "age" int in
+  let* age = D.field "age" int in
   (* if all went well [return] the person (or any error that might have
      occured along the way. *)
-  return @@ make_person name age
+  D.return @@ make_person name age
   ;;
 ```
 
